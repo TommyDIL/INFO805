@@ -58,6 +58,7 @@ precedence left MOINS_UNAIRE;
 program ::= 
     sequence:s {:
         node = (Node) s;
+        RESULT = (Node) s;
         ((Node)s).print();
     :} POINT
     ;

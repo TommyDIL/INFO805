@@ -52,19 +52,38 @@ public class Node {
         return "(" + element + " " + left + " " + right+ ")";
     }
 
-    private Boolean isLeaf() {
+    /**
+     * Check if a node correspond to a leaf.
+     * @return true if the node is a leaf, false if not.
+     */
+    public Boolean isLeaf() {
+//        System.out.println("left: " + this.left);
+//        System.out.println("right: " + this.right);
+
         return (left == null) && (right == null);
     }
 
-    public String getElement() {
-        return (String) element;
+    /**
+     * Check if a node correspond to a variable.
+     * @return true if the node is a variable, false if not.
+     */
+    public Boolean isVariable() {
+        if (element == null) return false;
+        if (element instanceof Node) return ((Node) element).isVariable();
+//        System.out.println("Current elt: "+element+", Is let: "+ element.equals("LET") + (element instanceof Node));
+        if (isLeaf()) return false;
+        return element.equals("LET");
+    }
+
+    public Object getElement() {
+        return element;
     }
 
     public void setElement(String element) {
         this.element = element;
     }
 
-    public Object getLeft() {
+    public Node getLeft() {
         return left;
     }
 
@@ -72,7 +91,7 @@ public class Node {
         this.left = (Node) left;
     }
 
-    public Object getRight() {
+    public Node getRight() {
         return right;
     }
 
